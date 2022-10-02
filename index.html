@@ -24,18 +24,17 @@
             <h1>osu!taiko pp calculator</h1>
             <span>based on <a href="https://osu.ppy.sh/forum/t/472288"> numbermaniac's</a> and <a href="https://mon.im/taikopp/">monty's</a> versions</span>
             <br/><br/>
-            <b>Paramaters</b>
-            <div>
-                Star difficulty: (DT/HT inclusive)<br><input value="5" id="strain" type="text"><br>
-                Maximum possible combo:<br><input value="500" id="numcircles" type="text"><br>
-                OD:<br><input value="5" id="od-input" type="text" oninput="displayOD();">
+            <b>Parameters</b>
+            <div id="input-data">
+                Star Rating: (DT/HT inclusive)<br><input value="5" id="strain" type="text"><br>
+                Max Possible Combo:<br><input value="500" id="numcircles" type="text"><br>
+                Overall Difficulty:<br><input value="5" id="od-input" type="text" oninput="displayOD();">
                 <i>
                     <div id="od-scaled"></div>
                     <div id="od-label"></div>
                 </i>
                 Misses:<br><input value="0" id="misses" type="text"><br>
-                Accuracy (out of 100):<br><input value="99" id="acc" type="text" oninput="setActive('acc');"><br>
-                <b>OR</b><br>
+                Accuracy %:<br><input value="99" id="acc" type="text" oninput="setActive('acc');"><br>
                 100s hit:<br><input value="0" id="100s" type="text" oninput="setActive('100s');"><br>
 
                 <div id="mods">
@@ -47,7 +46,7 @@
                     <input id="FL" type="checkbox"><label for="FL"></label>
                 </div>
 
-                <div id="pp"></div>
+                <h1 id="pp"></h1>
             </div>
       </main>
       <script>
@@ -135,7 +134,7 @@
              scaled = Math.round(scaled * 100) / 100;
              var hitWin = hitWindow(od);
              
-             document.getElementById("od-label").textContent = "300: " + hitWin + "ms";
+             document.getElementById("od-label").textContent = "300 Hit Window: " + hitWin + "ms";
              document.getElementById("od-scaled").textContent = "OD w/mods: " + scaled;
          };
          function calcPP(){

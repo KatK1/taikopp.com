@@ -9,9 +9,18 @@ html {
 
 #mods {
     display: flex;
+    margin-left: -10px;
 }
 
-input[type=text] {
+#input-data > * {
+    margin-bottom: 7px;
+}
+
+#pp {
+    margin-left: 110px;
+}
+
+input[type=number] {
     width: 23%;
 }
 
