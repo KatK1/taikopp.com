@@ -9,7 +9,7 @@ html {
 
 #mods {
     display: flex;
-    margin-left: -10px;
+    margin-left: 14px;
 }
 
 #input-data > * {
@@ -17,7 +17,7 @@ html {
 }
 
 #pp {
-    margin-left: 110px;
+    margin-left: 135px;
 }
 
 input[type=number] {
