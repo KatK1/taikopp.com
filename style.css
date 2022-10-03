@@ -20,7 +20,7 @@ html {
     margin-left: 110px;
 }
 
-input[type=text] {
+input[type=number] {
     width: 23%;
 }
 
