@@ -27,17 +27,17 @@
             <br/><br/>
             <b>Paramaters</b>
             <div>
-                Star difficulty: (DT/HT inclusive)<br><input value="5" id="strain" type="text"><br>
-                Maximum possible combo:<br><input value="500" id="numcircles" type="text"><br>
-                OD:<br><input value="5" id="od-input" type="text" oninput="displayOD();">
+                Star difficulty: (DT/HT inclusive)<br><input value="5" id="strain" type="number" step="0.1"><br>
+                Maximum possible combo:<br><input value="500" id="numcircles" type="number"><br>
+                OD:<br><input value="5" id="od-input" type="number" step="0.1" oninput="displayOD();">
                 <i>
                     <div id="od-scaled"></div>
                     <div id="od-label"></div>
                 </i>
-                Misses:<br><input value="0" id="misses" type="text"><br>
-                Accuracy (out of 100):<br><input value="99" id="acc" type="text" oninput="setActive('acc');"><br>
+                Misses:<br><input value="0" id="misses" type="number" oninput="setActive('misses');"><br>
+                Accuracy (out of 100):<br><input value="99" id="acc" type="number" step="0.1" oninput="setActive('acc');"><br>
                 <b>OR</b><br>
-                100s hit:<br><input value="0" id="100s" type="text" oninput="setActive('100s');"><br>
+                100s hit:<br><input value="0" id="100s" type="number" oninput="setActive('100s');"><br>
 
                 <div id="mods">
                     <input id="EZ" type="checkbox"><label for="EZ"></label>
@@ -70,7 +70,7 @@
              var inputs = document.getElementsByTagName('input');
              for(var i in inputs){
                  switch(inputs[i].type) {
-                     case "text":
+                     case "number":
                          inputs[i].addEventListener("input", calcPP);
                          break;
                      case "checkbox":
