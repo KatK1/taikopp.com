@@ -1,4 +1,4 @@
-This calculator is accurate to within around 1 pp.
+This calculator is 100% accurate, any inaccuracies are due to SR being rounded to the second decimal place on the osu! website.
 
 You can access the website [here](http://www.taikopp.com).
 

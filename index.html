@@ -116,7 +116,7 @@
         
             if (od > 5) {
                 hitWindow += (20 - 35) * (od - 5) / 5
-            } else {
+            } else if (od < 5) {
                 hitWindow -= (35 - 50) * (5 - od) / 5
             }
             
