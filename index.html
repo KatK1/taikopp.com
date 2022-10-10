@@ -27,16 +27,16 @@
         <br/><br/>
         <b>Parameters</b>
         <div id="input-data">
-            Star Rating: (DT/HT inclusive)<br><input value="5" id="strain" type="number" step="0.1"><br>
-            Max Possible Combo:<br><input value="500" id="numcircles" type="number"><br>
-            Overall Difficulty:<br><input value="5" id="od-input" type="number" step="0.1" oninput="displayOD();">
+            Star Rating: (DT/HT inclusive)<br><input min="0" value="5" id="strain" type="number" step="0.1"><br>
+            Max Possible Combo:<br><input min="0" value="500" id="numcircles" type="number"><br>
+            Overall Difficulty:<br><input min="0" value="5" id="od-input" type="number" step="0.1" oninput="displayOD();">
             <i>
                 <div id="od-scaled"></div>
                 <div id="od-label"></div>
             </i>
-            Misses:<br><input value="0" id="misses" type="number" oninput="setActive('misses');"><br>
-            Accuracy %:<br><input value="99" id="acc" type="number" step="0.1" oninput="setActive('acc');"><br>
-            100s hit:<br><input value="0" id="100s" type="number" oninput="setActive('100s');"><br>
+            Misses:<br><input min="0" value="0" id="misses" type="number" oninput="setActive('misses');"><br>
+            Accuracy %:<br><input min="0" value="99" id="acc" type="number" step="0.1" oninput="setActive('acc');"><br>
+            100s hit:<br><input min="0" value="0" id="100s" type="number" oninput="setActive('100s');"><br>
 
             <div id="mods">
                 <input id="EZ" type="checkbox"><label for="EZ"></label>
@@ -159,7 +159,7 @@
                 document.getElementById("acc").value = Math.round(acc * 100) / 100;
             }
             
-            if(strain < 0 || hitcount < 0 || misses < 0 || usercombo < 0 || acc < 0 || acc > 100 || OD300 < 0 ||
+            if(strain < 0 || hitcount <= 0 || misses < 0 || usercombo < 0 || acc < 0 || acc > 100 || OD300 < 0 ||
             (misses + hundreds) > hitcount || hundreds < 0){
                 document.getElementById("pp").innerHTML = "Something is wrong with at least one of your inputs."
                 return;
