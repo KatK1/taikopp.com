@@ -80,6 +80,10 @@ input[type=checkbox]:checked + label {
     background-image: url("./mod-icons/EZ.png");
 }
 
+#NF + label {
+    background-image: url("./mod-icons/NF.png");
+}
+
 #HR + label {
     background-image: url("./mod-icons/HR.png");
 }

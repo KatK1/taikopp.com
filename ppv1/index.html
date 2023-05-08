@@ -29,11 +29,11 @@
 <main class="page-content" aria-label="Content">
     <h1 class="move-in"><b>osu!taiko pp calculator</b></h1>
     <span class="move-in" style="animation-delay: .4s">based on <a href="https://osu.ppy.sh/forum/t/472288"> numbermaniac's</a> and <a
-            href="https://mon.im/taikopp/">monty's</a> versions<br><a href="ppv1">switch to ppv1 (morth sr)</a></span>
+            href="https://mon.im/taikopp/">monty's</a> versions<br><a href="https://www.taikopp.com">switch back to ppv2</a></span>
     <br/><br/>
     <b class="move-in" style="animation-delay: .9s">Parameters</b>
     <div class="wrapper move-in" style="animation-delay: 1.3s">
-        <link rel="stylesheet" href="style.css?v=2">
+        <link rel="stylesheet" href="https://www.taikopp.com/style.css">
 
 
             <div class="window card2" style="animation-delay: 1.3s">
@@ -69,6 +69,7 @@
         <div class="window  card2" style="animation-delay: 1.3s">
             <div id="mods">
                 <input id="EZ" type="checkbox"><label for="EZ"></label>
+                <input id="NF" type="checkbox"><label for="NF"></label>
                 <input id="HT" type="checkbox"><label for="HT"></label>
                 <input id="HR" type="checkbox"><label for="HR"></label>
                 <input id="DT" type="checkbox"><label for="DT"></label>
@@ -180,7 +181,7 @@
         let OD300 = hitWindow(+document.getElementById("od-input").value);
         let acc = +document.getElementById("acc").value;
 
-        const effectiveMissCount = Math.max(1.0, 1000.0 / usercombo) * misses;
+        const effectiveMissCount = misses
 
         let hundreds = -1;
         if (activeInput == "acc") {
@@ -199,38 +200,29 @@
             return;
         }
 
-        let strainValue = Math.pow(5 * Math.max(1.0, strain / 0.115) - 4.0, 2.25) / 1150.0;
+        let strainValue = Math.pow(5 * Math.max(1.0, strain / 0.0075) - 4.0, 2.0) / 100000.0;
         let strainLengthBonus = 1 + 0.1 * Math.min(1.0, hitcount / 1500.0);
         let accLengthBonus = Math.min(1.15, Math.pow(hitcount / 1500.0, 0.3))
 
         strainValue *= strainLengthBonus;
-        strainValue *= Math.pow(0.986, effectiveMissCount);
-        strainValue *= Math.pow(acc / 100, 2.0);
+        strainValue *= Math.pow(0.985, effectiveMissCount);
 
-        let accValue = Math.pow(60.0 / OD300, 1.1) * Math.pow(acc / 100, 8.0) * Math.pow(strain, 0.4) * 27.0;
+        let accValue = Math.pow(150 / OD300, 1.1) * Math.pow(acc / 100, 15) * 22.0;
         accValue *= Math.min(Math.pow(hitcount / 1500, 0.3), 1.15);
 
-        let globalMultiplier = 1.13;
-        if (document.getElementById("HD").checked) {
-            globalMultiplier *= 1.075
-            strainValue *= 1.025
-        }
+        let globalMultiplier = 1.1;
 
-        if (document.getElementById("EZ").checked) {
-            globalMultiplier *= 0.975
-            strainValue *= 0.985
+        if (document.getElementById("HD").checked) {
+            globalMultiplier *= 1.1
+            strainValue *= 1.025
         }
 
         if (document.getElementById("FL").checked) {
             strainValue *= 1.05 * strainLengthBonus
         }
 
-        if (document.getElementById("HR").checked) {
-            strainValue *= 1.05
-        }
-
-        if (document.getElementById("HD").checked && document.getElementById("FL").checked) {
-            accValue *= Math.max(1.050, 1.075 * accLengthBonus);
+        if (document.getElementById("NF").checked) {
+            globalMultiplier *= 0.9
         }
 
         let totalValue = Math.pow(Math.pow(strainValue, 1.1) + Math.pow(accValue, 1.1), 1.0 / 1.1) * globalMultiplier;
