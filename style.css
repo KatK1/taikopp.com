@@ -241,10 +241,10 @@ footer {
 
 /* CARD BACKGROUNDS */
 
-.card-1 {
-// background: radial-gradient(#1fe4f5, #3fbafe);
+/* .card-1 {
+    background: radial-gradient(#1fe4f5, #3fbafe);
     background-image: url(https://miruku.cafe/files/d494eba2-8f26-4b4d-b1ad-59b009bc9c6e);
-}
+} */
 
 .card-2 {
     background: #1e1b1b;
@@ -298,4 +298,11 @@ footer {
     bottom: 0;
     right: 0;
     width: 20%;
+}
+
+#github-link {
+    position: relative;
+    margin-top: 100px;
+    height: 50px;
+    color: beige !important;
 }
