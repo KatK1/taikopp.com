@@ -191,8 +191,6 @@
         let OD300 = hitWindow(+document.getElementById("od-input").value);
         let acc = +document.getElementById("acc").value;
 
-        const effectiveMissCount = misses
-
         let hundreds = -1;
         if (activeInput == "acc") {
             hundreds = Math.round((1 - misses / hitcount - acc / 100) * 2 * hitcount);
@@ -215,9 +213,9 @@
         let accLengthBonus = Math.min(1.15, Math.pow(hitcount / 1500.0, 0.3))
 
         strainValue *= strainLengthBonus;
-        strainValue *= Math.pow(0.985, effectiveMissCount);
+        strainValue *= Math.pow(0.99, misses);
 
-        let accValue = Math.pow(150 / OD300, 1.1) * Math.pow(acc / 100, 15) * 22.0;
+        let accValue = Math.pow(150 / OD300, 1.1) * Math.pow(acc / 100, 15) * 21.0;
         accValue *= Math.min(Math.pow(hitcount / 1500, 0.3), 1.15);
 
         let globalMultiplier = 1.1;
