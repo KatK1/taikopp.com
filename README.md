@@ -1,5 +1,5 @@
 The PPv2 calculator is 100% accurate, any inaccuracies are due to SR being rounded to the second decimal place on the osu! website.
-The PPv1 calculator is accurate to within around 3pp with my testing, I'm not sure what is off about it.
+The PPv1 calculator is off about 10pp at most from my testing, still not sure how to make it more accurate.
 
 You can access the website [here](http://www.taikopp.com).
 
