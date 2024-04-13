@@ -58,7 +58,7 @@
                             <h5 class="card-title">Star Rating:</h5>
                             <div data-mdb-input-init class="form-outline">
                                 <input id="star-rating" type="number" class="form-control" min="0" value="5" step="0.1"/>
-                                <label>Include DT/HT, it isn't possible to predict the SR change</label>
+                                <label>Include DT/HT (it isn't possible to predict the SR change)</label>
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Combo for FC:</h5>
                             <div data-mdb-input-init class="form-outline">
-                                <input id="max-combo" type="number" class="form-control" value="1000"/>
+                                <input id="max-combo" type="number" class="form-control" min="0" value="1000" step="1"/>
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Overall Difficulty:</h5>
                             <div data-mdb-input-init class="form-outline">
-                                <input id="overall-difficulty" type="number" class="form-control" value="5"/>
+                                <input id="overall-difficulty" type="number" class="form-control" min="0" value="5"/>
                                 <label id="hit-time"></label>
                                 <label id="od-scaled"></label>
                             </div>
@@ -90,7 +90,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Miss Count:</h5>
                             <div data-mdb-input-init class="form-outline">
-                                <input id="miss-count" type="number" class="form-control" value="0"/>
+                                <input id="miss-count" type="number" class="form-control" min="0" value="0"/>
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                             <h5 class="card-title">Accuracy: (%)</h5>
                             <div data-mdb-input-init class="form-outline">
                                 <div id="accuracy-wrap">
-                                    <input id="accuracy" type="number" class="form-control" value="99" oninput="setActive('accuracy')"/>
+                                    <input id="accuracy" type="number" class="form-control" min="0" value="99" step="0.1" max="100" oninput="setActive('accuracy')"/>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                             <h5 class="card-title">100 Count:</h5>
                             <div data-mdb-input-init class="form-outline">
                                 <div id="100-count-wrap">
-                                    <input id="100-count" type="number" class="form-control" oninput="setActive('100-count')"/>
+                                    <input id="100-count" type="number" class="form-control" min="0" value="20" oninput="setActive('100-count')"/>
                                 </div>
                             </div>
                         </div>
@@ -140,6 +140,7 @@
             </div>
         </div>
         <div id="pp-value" class="display-3 text-center"></div>
+        <script src="./scripts/updates.js"></script>
         <script src="./scripts/ppcalc.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
