@@ -24,7 +24,7 @@
         <meta name="msapplication-config" content="/icon/browserconfig.xml">
     </head>
 
-    <body>
+    <body class="container-fluid">
         <div class="container-fluid" style="--bs-gutter-y: 1.5rem; padding-top: calc(var(--bs-gutter-y)* .5);">
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
@@ -38,12 +38,14 @@
                     <li><h5 class="dropdown-header">Old Site Versions</h5></li>
                     <li><a class="dropdown-item" href="https://katk1.dev/legacy/taikopp.html">Legacy taikopp Site</a></li>
                 </ul>
+                <a href="https://katk1.dev/legacy">
+                    <button type="button" class="btn btn-primary">Old Site</button>
+                </a>
             </div>
         </div>
         <div class="container">
             <div class="text-center">
                 <h1 class="display-3">osu!taiko pp calculator</h1>
-                <h2 class="display-4"><a href="https://katk1.dev/legacy/taikopp" class="text-decoration-none">old version</a></h2>
                 <p>based on <a href="https://osu.ppy.sh/forum/t/472288"> numbermaniac's</a> and <a href="https://mon.im/taikopp/">monty's</a> versions</p>
                 <div class="ppv2-toggle">
                     <input type="checkbox" class="btn-check" id="btn-check-outlined" checked autocomplete="off">
