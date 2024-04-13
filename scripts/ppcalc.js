@@ -1,6 +1,7 @@
 console.log("ppcalc loaded");
 
 function calcPP() {
+    console.log("calcPP() ran");
     let starRating = document.getElementById("star-rating").value;
     let maxCombo = document.getElementById("max-combo").value;
     let countMiss = document.getElementById("miss-count").value;
@@ -12,10 +13,12 @@ function calcPP() {
     if (activeInput == "accuracy") {
         count100 = Math.round((1 - countMiss / countHit - accuracy / 100) * 2 * countHit);
         document.getElementById("100-count").value = count100;
+        console.log("100-count changed");
     } else {
         count100 = document.getElementById("100-count").value;
         accuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
         document.getElementById("accuracy").value = Math.round(accuracy * 100) / 100;
+        console.log("accuracy changed");
     }
 
     if (starRating < 0 || countHit <= 0 || countMiss < 0 || countHit < 0 || accuracy < 0 || accuracy > 100 || hitTime300 < 0 ||
@@ -27,42 +30,52 @@ function calcPP() {
     const effectiveMissCount = Math.max(1.0, 1000.0 / countHit) * countMiss;
 
     let strainValue = Math.pow(5 * Math.max(1.0, starRating / 0.115) - 4.0, 2.25) / 1150.0;
+    console.log("strainValue calculated");
     let strainLengthBonus = 1 + 0.1 * Math.min(1.0, countHit / 1500.0);
-    let accLengthBonus = Math.min(1.15, Math.pow(countHit / 1500.0, 0.3))
+    console.log("strainLengthBonus calculated");
 
     strainValue *= strainLengthBonus;
     strainValue *= Math.pow(0.986, effectiveMissCount);
     strainValue *= Math.pow(accuracy / 100, 2.0);
+    console.log("strainValue modified by strainLengthBonus and misses and acc");
 
     let accValue = Math.pow(60.0 / hitTime300, 1.1) * Math.pow(accuracy / 100, 8.0) * Math.pow(starRating, 0.4) * 27.0;
     accValue *= Math.min(Math.pow(countHit / 1500, 0.3), 1.15);
+    console.log("accValue calculated")
 
     let globalMultiplier = 1.13;
     if (document.getElementById("HD").checked) {
         globalMultiplier *= 1.075
         strainValue *= 1.025
+        console.log("HD changes applied")
     }
 
     if (document.getElementById("EZ").checked) {
         globalMultiplier *= 0.975
         strainValue *= 0.985
+        console.log("EZ changes applied")
     }
 
     if (document.getElementById("FL").checked) {
         strainValue *= 1.05 * strainLengthBonus
+        console.log("FL changes applied")
     }
 
     if (document.getElementById("HR").checked) {
         strainValue *= 1.05
+        console.log("HR changes applied")
     }
 
     if (document.getElementById("HD").checked && document.getElementById("FL").checked) {
         accValue *= Math.max(1.050, 1.075 * accLengthBonus);
+        console.log("HDFL changes applied")
     }
 
     let totalValue = Math.pow(Math.pow(strainValue, 1.1) + Math.pow(accValue, 1.1), 1.0 / 1.1) * globalMultiplier;
+    console.log("totalValue calculated")
 
     document.getElementById("pp-value").innerHTML = Math.round(totalValue * 1000) / 1000 + " pp";
+    console.log("totalValue displayed")
 };
 
 function calcPPv1() {
