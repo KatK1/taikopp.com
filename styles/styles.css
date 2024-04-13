@@ -1,3 +1,7 @@
+#pp-value {
+    color: #fff;
+}
+
 .card-body2 {
     padding-left: 0;
     padding-right: 0;
@@ -6,11 +10,6 @@
 
 .card {
     padding: 0px;
-}
-
-.row {
-    --bs-gutter-x: 1rem;
-    --bs-gutter-y: 1rem;
 }
 
 .wrapper {
@@ -86,4 +85,74 @@ input[type=number] {
 
 #NF + label {
     background-image: url("/mod-icons/NF.png");
+}
+
+/* copy from katk1.dev */
+[data-bs-theme=dark] {
+    --bs-body-bg: #1a1818;
+    --bs-secondary-bg: #080404;
+    --bs-body-color: #ffa6a6;
+}
+
+a {
+    color: rgb(233, 70, 70);
+}
+
+.display-3 {
+    color: rgb(255, 116, 116);
+}
+
+h4 {
+    color: rgb(229, 147, 147);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-border-color: rgb(233, 70, 70);
+}
+
+.btn-primary {
+    --bs-btn-bg: rgb(216, 112, 112);
+    --bs-btn-border-color: rgb(233, 70, 70);
+    --bs-btn-hover-bg: rgb(165, 82, 82);
+}
+
+.btn-secondary {
+    --bs-btn-bg: rgb(216, 112, 112);
+    --bs-btn-border-color: rgb(233, 70, 70);
+    --bs-btn-hover-bg: rgb(165, 82, 82);
+}
+
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+    color: #fff;
+    border-color: rgb(233, 70, 70);
+    background-color: rgb(216, 112, 112);
+}
+
+.dropdown-menu {
+    --bs-dropdown-color: rgb(216, 112, 112);
+    --bs-dropdown-bg: #241f1f;
+}
+
+.dropdown-item.active {
+    background-color: rgb(216, 112, 112);
+}
+
+.dropdown-header {
+    color: rgb(165, 82, 82);
+}
+
+.row {
+    --bs-gutter-x: 1rem;
+    --bs-gutter-y: 1rem;
+}
+
+.text-bg-success {
+    color: #fff !important;
+    background-color: rgb(233, 70, 70) !important;
+}
+
+.text-bg-secondary {
+    color: #fff !important;
+    background-color: rgb(107, 36, 36) !important;
 }
