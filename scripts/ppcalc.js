@@ -1,3 +1,5 @@
+console.log("ppcalc loaded");
+
 function calcPP() {
     let starRating = document.getElementById("star-rating").value;
     let maxCombo = document.getElementById("max-combo").value;

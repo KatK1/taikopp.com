@@ -1,3 +1,5 @@
+console.log("updates loaded");
+
 window.addEventListener("DOMContentLoaded", function() {
     setActive("accuracy");
     updateValues();
