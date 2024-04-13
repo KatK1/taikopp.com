@@ -12,6 +12,14 @@
     padding: 0px;
 }
 
+.card-title {
+    color: rgb(255, 116, 116);
+}
+
+.form-control {
+    color: #fff;
+}
+
 .wrapper {
     align-items: center;
     text-align: center;
