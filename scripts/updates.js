@@ -1,9 +1,7 @@
 console.log("updates loaded");
 
 window.onload = function() {
-    console.log("loading listener");
     setActive("accuracy");
-    console.log("set accuracy as input");
     updateValues();
     console.log("updated values");
     calcPP();
@@ -14,13 +12,9 @@ window.onload = function() {
     var hr = document.getElementById("HR");
 
     ez.addEventListener("click", uncheck(hr));
-    console.log("EventListener1 added");
     hr.addEventListener("click", uncheck(ez));
-    console.log("EventListener2 added");
     ht.addEventListener("click", uncheck(dt));
-    console.log("EventListener3 added");
     dt.addEventListener("click", uncheck(ht));
-    console.log("EventListener4 added");
 
     var inputs = document.getElementsByTagName("input");
 
@@ -28,11 +22,9 @@ window.onload = function() {
         switch (inputs[i].type) {
             case "number":
                 inputs[i].addEventListener("input", updateValues);
-                console.log("EventListener5 added");
                 break;
             case "checkbox":
                 inputs[i].addEventListener("click", updateValues);
-                console.log("EventListener6 added");
                 break;
         }
     }
@@ -58,7 +50,6 @@ function setActive(name) {
 function uncheck(elem) {
     return function() {
         elem.checked = false;
-        console.log("uncheck");
     }
 }
 
@@ -70,7 +61,6 @@ function scaleOD(overallDifficulty) {
         overallDifficulty *= 1.4;
     }
     overallDifficulty = Math.max(Math.min(overallDifficulty, 10), 0);
-    console.log("od scaled");
     return overallDifficulty;
 }
 
@@ -84,7 +74,6 @@ function calculateHitTime(overallDifficulty) {
     if (document.getElementById("DT").checked) {
         hitTime300 /= 1.5;
     }
-    console.log("hit time calculated");
     return Math.round(hitTime300 * 100) / 100;
 };
 
