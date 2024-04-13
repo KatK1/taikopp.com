@@ -83,10 +83,10 @@ function updateValues() {
     document.getElementById("od-scaled").textContent = "OD w/mods: " + odScaled;
 
     if (document.getElementById('btn-check-outlined').checked) {
-        document.getElementById('nfdiv').classList.add("invisible");
+        document.getElementById('nfdiv').classList.add("hidden");
         calcPP();
     } else {
-        document.getElementById('nfdiv').classList.remove("invisible");
+        document.getElementById('nfdiv').classList.remove("hidden");
         calcPPv1();
     }
 };
