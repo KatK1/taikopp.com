@@ -1,0 +1,89 @@
+.card-body2 {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+}
+
+.card {
+    padding: 0px;
+}
+
+.row {
+    --bs-gutter-x: 1rem;
+    --bs-gutter-y: 1rem;
+}
+
+.wrapper {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.hidden {
+    display: none;
+}
+
+.ppv2-toggle {
+    margin: 1rem;
+}
+
+input[type=number] {
+    text-align: center;
+}
+
+.mod {
+    display:none;
+}
+
+.mod + label {
+    background-image: url("/mod-icons/EZ.png");
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position: center; 
+    height: 66px;
+    width: 68px;
+    display: inline-block;
+    padding: 0;
+    cursor: pointer;
+    
+    -webkit-transition: background-size 0.2s, -webkit-transform 0.2s;
+    transition:         background-size 0.2s, transform 0.2s;
+    -webkit-transition-timing-function: ease;
+    transition-timing-function:         ease;
+}
+
+.mod:checked + label {
+    background-size: 100%;
+    -webkit-transform: rotate(5deg);
+    transform:         rotate(5deg);
+}
+
+#EZ + label {
+    background-image: url("/mod-icons/EZ.png");
+}
+
+#DT + label {
+    background-image: url("/mod-icons/DT.png");
+}
+
+#HT + label {
+    background-image: url("/mod-icons/HT.png");
+}
+
+#HD + label {
+    background-image: url("/mod-icons/HD.png");
+}
+
+#HR + label {
+    background-image: url("/mod-icons/HR.png");
+}
+
+#FL + label {
+    background-image: url("/mod-icons/FL.png");
+}
+
+#NF + label {
+    background-image: url("/mod-icons/NF.png");
+}

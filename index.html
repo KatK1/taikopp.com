@@ -1,106 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>osu!taiko pp calculator</title>
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="osu!taiko pp calculator">
-    <meta name="twitter:description" content="accurate taiko ppv2 calculator">
-    <script src="https://kit.fontawesome.com/c5b454ab1b.js" crossorigin="anonymous"></script>
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>osu!taiko pp calculator</title>
+        
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="osu!taiko pp calculator">
+        <meta name="twitter:description" content="accurate taiko ppv2 calculator">
+        <script src="https://kit.fontawesome.com/c5b454ab1b.js" crossorigin="anonymous"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="./styles/styles.css">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
-    <link rel="manifest" href="/icon/site.webmanifest">
-    <link rel="mask-icon" href="/icon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="/icon/favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/icon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+        <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
+        <link rel="manifest" href="/icon/site.webmanifest">
+        <link rel="mask-icon" href="/icon/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="shortcut icon" href="/icon/favicon.ico">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-config" content="/icon/browserconfig.xml">
+    </head>
 
-    <style>
-        .wrapper {
-            font-family: 'Inter', sans-serif;
-            align-items: center;
-            text-align: center;
-            display: flex;
-            flex-wrap: wrap;
-
-            justify-content: center;
-        }
-    </style>
-</head>
-<main class="page-content" aria-label="Content">
-    <h1 class="move-in"><b>osu!taiko pp calculator</b></h1>
-    <span class="move-in" style="animation-delay: .4s">based on <a href="https://osu.ppy.sh/forum/t/472288"> numbermaniac's</a> and <a
-            href="https://mon.im/taikopp/">monty's</a> versions<br><br><a href="ppv1">switch to the ppv1 calculator (pre-Oct 2022)</a></span>
-    <br/><br/>
-    <b class="move-in" style="animation-delay: .9s">Parameters</b>
-    <div class="wrapper move-in" style="animation-delay: 1.3s">
-        <link rel="stylesheet" href="style.css?v=2">
-
-
-            <div class="window card2" style="animation-delay: 1.3s">
-                <div class="title-bar"><b>Star Rating: (DT/HT inclusive)</b><br><br></div>
-                <input min="0" value="5" id="strain" type="number" step="0.1"><br>
-            </div>
-
-        <div class="window  card2" >
-            <div class="title-bar"><b>Max Possible Combo:</b><br><br></div>
-            <input min="0" value="500" id="numcircles" type="number"><br>
-        </div>
-        <div class="window card2" style="animation-delay: 1.3s">
-            <div class="title-bar"><b>Overall Difficulty:</b><br><br></div>
-            <input min="0" value="5" id="od-input" type="number" step="0.1" oninput="displayOD();">
-            <i>
-                <br><br>
-                <div id="od-scaled"></div>
-                <div id="od-label" style="visibility: hidden;"></div>
-            </i>
-        </div>
-        <div class="window card2" style="animation-delay: 1.3s">
-            <div class="title-bar"><b>Misses:</b><br><br></div>
-            <input min="0" value="0" id="misses" type="number" oninput="setActive('misses');"><br>
-        </div>
-        <div class="window card2" style="animation-delay: 1.3s">
-            <div class="title-bar"><b>Accuracy %:</b><br><br></div>
-            <input min="0" value="99" id="acc" type="number" step="0.1" oninput="setActive('acc');"><br>
-        </div>
-        <div class="window card2" style="animation-delay: 1.3s">
-            <div class="title-bar"><b>100s hit:</b><br><br></div>
-            <input min="0" value="0" id="100s" type="number" oninput="setActive('100s');"><br>
-        </div>
-        <div class="window  card2" style="animation-delay: 1.3s">
-            <div id="mods">
-                <input id="EZ" type="checkbox"><label for="EZ"></label>
-                <input id="HT" type="checkbox"><label for="HT"></label>
-                <input id="HR" type="checkbox"><label for="HR"></label>
-                <input id="DT" type="checkbox"><label for="DT"></label>
-                <input id="HD" type="checkbox"><label for="HD"></label>
-                <input id="FL" type="checkbox"><label for="FL"></label>
+    <body>
+        <div class="container-fluid" style="--bs-gutter-y: 1.5rem; padding-top: calc(var(--bs-gutter-y)* .5);">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="https://katk1.dev">Home</a></li>
+                    <li><a class="dropdown-item active" href="#" aria-current="page">taikopp</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="https://github.com/KatK1">Github</a></li>
+                    <li><a class="dropdown-item" href="https://osu.ppy.sh/user/21203707">osu! profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><h5 class="dropdown-header">Old Site Versions</h5></li>
+                    <li><a class="dropdown-item" href="https://katk1.dev/legacy/taikopp">Legacy taikopp Site</a></li>
+                </ul>
             </div>
         </div>
+        <div class="container">
+            <div class="text-center">
+                <h1 class="display-3">osu!taiko pp calculator</h1>
+                <p>based on <a href="https://osu.ppy.sh/forum/t/472288"> numbermaniac's</a> and <a href="https://mon.im/taikopp/">monty's</a> versions</p>
+                <div class="ppv2-toggle">
+                    <input type="checkbox" class="btn-check" id="btn-check-outlined" checked autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined">PPv2</label>
+                </div>
+            </div>
         </div>
-
-
-    </div>
-    <h1 id="pp" class="move-in"  style="animation-delay: 1.6s"></h1>
-</main>
-<script src="scripts/ppv2.js"></script>
-</div>
-</main>
-
-<footer id="github-link" class="site-footer">
-    <a href="https://github.com/KatK1/taiko-pp-calculator" class="pagelink">
-    <i class="fa-brands fa-github fa-2xl"></i>
-    </a>
-</footer>
-
-</body>
+        <div class="container-fluid wrapper" style="padding-left: 5rem; padding-right: 5rem;">
+            <div class="row">
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Star Rating:</h5>
+                            <div data-mdb-input-init class="form-outline">
+                                <input id="star-rating" type="number" class="form-control" min="0" value="5" step="0.1"/>
+                                <label>Include DT/HT, it isn't possible to predict the SR change</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Combo for FC:</h5>
+                            <div data-mdb-input-init class="form-outline">
+                                <input id="max-combo" type="number" class="form-control" value="1000"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Overall Difficulty:</h5>
+                            <div data-mdb-input-init class="form-outline">
+                                <input id="overall-difficulty" type="number" class="form-control" value="5"/>
+                                <label id="hit-time"></label>
+                                <label id="od-scaled"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Miss Count:</h5>
+                            <div data-mdb-input-init class="form-outline">
+                                <input id="miss-count" type="number" class="form-control" value="0"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Accuracy: (%)</h5>
+                            <div data-mdb-input-init class="form-outline">
+                                <div id="accuracy-wrap">
+                                    <input id="accuracy" type="number" class="form-control" value="99" oninput="setActive('accuracy')"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">100 Count:</h5>
+                            <div data-mdb-input-init class="form-outline">
+                                <div id="100-count-wrap">
+                                    <input id="100-count" type="number" class="form-control" oninput="setActive('100-count')"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body2">
+                            <h5 class="card-title">Mods:</h5>
+                            <div class="wrapper">
+                                <input class="mod" id="EZ" type="checkbox"><label for="EZ"></label>
+                                <input class="mod" id="DT" type="checkbox"><label for="DT"></label>
+                                <input class="mod" id="HT" type="checkbox"><label for="HT"></label>
+                                <input class="mod" id="HD" type="checkbox"><label for="HD"></label>
+                                <input class="mod" id="HR" type="checkbox"><label for="HR"></label>
+                                <input class="mod" id="FL" type="checkbox"><label for="FL"></label>
+                                <div id="nfdiv" class="invisible">
+                                    <input class="mod" id="NF" type="checkbox"><label for="NF"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="pp-value" class="display-3 text-center"></div>
+        <script src="./scripts/ppcalc.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    </body>
 </html>
