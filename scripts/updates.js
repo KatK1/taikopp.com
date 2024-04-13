@@ -1,6 +1,6 @@
 console.log("updates loaded");
 
-window.addEventListener("DOMContentLoaded", function() {
+window.onload = function() {
     console.log("loading listener");
     setActive("accuracy");
     console.log("set accuracy as input");
@@ -36,7 +36,7 @@ window.addEventListener("DOMContentLoaded", function() {
                 break;
         }
     }
-});
+};
 
 function setActive(name) {
     activeInput = name;
