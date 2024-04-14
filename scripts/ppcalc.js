@@ -1,7 +1,7 @@
 console.log("ppcalc loaded");
 
-function calcPP() {
-    console.log("calcPP() ran");
+function calcPPv3() {
+    console.log("calcPPv3() ran");
     var starRating = document.getElementById("star-rating").value;
     var maxCombo = document.getElementById("max-combo").value;
     var countMiss = document.getElementById("miss-count").value;
@@ -73,8 +73,8 @@ function calcPP() {
     document.getElementById("pp-value").innerHTML = Math.round(totalValue * 1000) / 1000 + "pp";
 };
 
-function calcPPv1() {
-    console.log("calcPPv1() ran");
+function calcPPv2() {
+    console.log("calcPPv2() ran");
     var starRating = document.getElementById("star-rating").value;
     var maxCombo = document.getElementById("max-combo").value;
     var countMiss = document.getElementById("miss-count").value;

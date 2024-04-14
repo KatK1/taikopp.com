@@ -3,8 +3,6 @@ console.log("updates loaded");
 window.onload = function() {
     setActive("accuracy");
     updateValues();
-    console.log("updated values");
-    calcPP();
 
     var inputs = document.getElementsByTagName("input");
 
@@ -105,10 +103,10 @@ function updateValues() {
 
     if (document.getElementById('ppv2-toggle').checked) {
         document.getElementById('nfdiv').classList.add("hidden");
-        calcPP();
+        calcPPv3();
     } else {
         document.getElementById('nfdiv').classList.remove("hidden");
-        calcPPv1();
+        calcPPv2();
     }
     console.log("values updated");
 };
