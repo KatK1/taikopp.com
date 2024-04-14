@@ -6,16 +6,6 @@ window.onload = function() {
     console.log("updated values");
     calcPP();
 
-    var ez = document.getElementById("EZ");
-    var dt = document.getElementById("DT");
-    var ht = document.getElementById("HT");
-    var hr = document.getElementById("HR");
-
-    ez.addEventListener("click", uncheck(hr));
-    hr.addEventListener("click", uncheck(ez));
-    ht.addEventListener("click", uncheck(dt));
-    dt.addEventListener("click", uncheck(ht));
-
     var inputs = document.getElementsByTagName("input");
 
     for (var i in inputs) {
@@ -65,8 +55,11 @@ function scaleOD(overallDifficulty) {
 }
 
 function calculateHitTime(overallDifficulty) {
-    overallDifficulty = scaleOD(overallDifficulty);
-    var hitTime300 = 50 - 3 * overallDifficulty;
+    if (document.getElementById("EZ").checked) {
+        overallDifficulty = scaleOD(overallDifficulty);
+    }
+
+    let hitTime300 = 50 - 3 * overallDifficulty;
 
     if (document.getElementById("HT").checked) {
         hitTime300 *= 0.75;
@@ -74,19 +67,43 @@ function calculateHitTime(overallDifficulty) {
     if (document.getElementById("DT").checked) {
         hitTime300 /= 1.5;
     }
-    return Math.round(hitTime300 * 100) / 100;
+    return hitTime300;
 };
 
+function maximumInput() {
+    let boxOD = document.getElementById("overall-difficulty");
+    let boxACCURACY = document.getElementById("accuracy");
+
+    if (document.getElementById("impossible-values-toggle").checked) {
+        boxOD.max = 9999999999999999999999999999999999999;
+        boxACCURACY.max = 9999999999999999999999999999999999999;
+    } else {
+        var ez = document.getElementById("EZ");
+        var dt = document.getElementById("DT");
+        var ht = document.getElementById("HT");
+        var hr = document.getElementById("HR");
+
+        ez.addEventListener("click", uncheck(hr));
+        hr.addEventListener("click", uncheck(ez));
+        ht.addEventListener("click", uncheck(dt));
+        dt.addEventListener("click", uncheck(ht));
+        
+        boxOD.max = 10;
+        boxACCURACY.max = 100;
+    }
+}
+
 function updateValues() {
+    maximumInput();
     let overallDifficulty = document.getElementById("overall-difficulty").value;
-    var odScaled = scaleOD(overallDifficulty);
+    let odScaled = scaleOD(overallDifficulty);
     odScaled = Math.round(odScaled * 100) / 100;
-    var hitTime300 = calculateHitTime(odScaled);
+    let hitTime300 = calculateHitTime(overallDifficulty);
 
     document.getElementById("hit-time").textContent = "300 Hit Window: " + hitTime300 + "ms";
     document.getElementById("od-scaled").textContent = "OD w/mods: " + odScaled;
 
-    if (document.getElementById('btn-check-outlined').checked) {
+    if (document.getElementById('ppv2-toggle').checked) {
         document.getElementById('nfdiv').classList.add("hidden");
         calcPP();
     } else {

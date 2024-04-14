@@ -16,6 +16,16 @@
     color: rgb(255, 116, 116);
 }
 
+.form-check-input {
+    background-color: #b39b9b;
+    border: var(--bs-border-width) solid rgb(233, 70, 70);
+}
+
+.form-check-input:checked {
+    background-color: rgb(255, 116, 116);
+    border-color: rgb(233, 70, 70);
+}
+
 .form-control {
     color: #fff;
 }
@@ -32,7 +42,7 @@
     display: none;
 }
 
-.ppv2-toggle {
+.basic-margin {
     margin: 1rem;
 }
 
