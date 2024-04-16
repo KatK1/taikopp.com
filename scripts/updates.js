@@ -1,7 +1,7 @@
 console.log("updates loaded");
 
 window.onload = function() {
-    setActive("accuracy");
+    set100used();
     updateValues();
 
     var inputs = document.getElementsByTagName("input");
@@ -18,21 +18,20 @@ window.onload = function() {
     }
 };
 
-function setActive(name) {
-    activeInput = name;
-    if (name == "accuracy") {
-        document.getElementById("accuracy").classList.remove("inactive");
-        document.getElementById("100-count").classList.remove("active");
-        document.getElementById("accuracy").classList.add("active");
-        document.getElementById("100-count").classList.add("inactive");
-        console.log("accuracy set as activeInput");
-    } else {
-        document.getElementById("accuracy").classList.remove("active");
-        document.getElementById("100-count").classList.remove("inactive");
-        document.getElementById("accuracy").classList.add("inactive");
-        document.getElementById("100-count").classList.add("active");
-        console.log("100-count set as activeInput");
-    }
+function setAccuracyUsed() {
+    document.getElementById("accuracy").classList.remove("not-used");
+    document.getElementById("100-count").classList.remove("used");
+    document.getElementById("accuracy").classList.add("used");
+    document.getElementById("100-count").classList.add("not-used");
+    console.log("accuracy set as usedInput");
+}
+
+function set100used() {
+    document.getElementById("accuracy").classList.remove("used");
+    document.getElementById("100-count").classList.remove("not-used");
+    document.getElementById("accuracy").classList.add("not-used");
+    document.getElementById("100-count").classList.add("used");
+    console.log("100-count set as usedInput");
 }
 
 function uncheck(elem) {
@@ -42,22 +41,22 @@ function uncheck(elem) {
 }
 
 function scaleOD(overallDifficulty) {
+    let scalingOD = (document.getElementById("overall-difficulty").value);
     if (document.getElementById("EZ").checked) {
-        overallDifficulty /= 2;
+        scalingOD /= 2;
+        console.log(scalingOD);
     }
     if (document.getElementById("HR").checked) {
-        overallDifficulty *= 1.4;
+        scalingOD *= 1.4;
+        console.log(scalingOD);
     }
-    overallDifficulty = Math.max(Math.min(overallDifficulty, 10), 0);
-    return overallDifficulty;
+    let scaledOD = Math.max(Math.min(scalingOD, 10), 0);
+    return scaledOD;
 }
 
 function calculateHitTime(overallDifficulty) {
-    if (document.getElementById("EZ").checked) {
-        overallDifficulty = scaleOD(overallDifficulty);
-    }
-
-    let hitTime300 = 50 - 3 * overallDifficulty;
+    let scaledOD = scaleOD(document.getElementById("overall-difficulty").value);
+    let hitTime300 = 50 - 3 * scaledOD;
 
     if (document.getElementById("HT").checked) {
         hitTime300 *= 0.75;
@@ -68,7 +67,13 @@ function calculateHitTime(overallDifficulty) {
     return hitTime300;
 };
 
-function maximumInput() {
+function inputHandler() {
+    let accuracy = document.getElementById("accuracy");
+    let count100 = document.getElementById("100-count");
+
+    accuracy.addEventListener("input", setAccuracyUsed);
+    count100.addEventListener("input", set100used);
+
     let boxOD = document.getElementById("overall-difficulty");
     let boxACCURACY = document.getElementById("accuracy");
 
@@ -92,7 +97,7 @@ function maximumInput() {
 }
 
 function updateValues() {
-    maximumInput();
+    inputHandler();
     let overallDifficulty = document.getElementById("overall-difficulty").value;
     let odScaled = scaleOD(overallDifficulty);
     odScaled = Math.round(odScaled * 100) / 100;
