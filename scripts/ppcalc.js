@@ -6,21 +6,22 @@ function calcPPv3() {
     var maxCombo = document.getElementById("max-combo").value;
     var countMiss = document.getElementById("miss-count").value;
     var countHit = maxCombo - countMiss; 
-    var accuracy = document.getElementById("accuracy").value;
     var hitTime300 = calculateHitTime(scaleOD(document.getElementById("overall-difficulty").value));
     var count100 = document.getElementById("100-count").value;
 
     if (document.getElementById("accuracy").classList.contains("used")) {
+        var accuracy = document.getElementById("accuracy").value;
         count100 = Math.round((1 - countMiss / countHit - accuracy / 100) * 2 * countHit);
+        var internalAccuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
         document.getElementById("100-count").value = count100;
     } else {
-        count100 = document.getElementById("100-count").value;
-        accuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
+        var accuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
+        var internalAccuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
         document.getElementById("accuracy").value = Math.round(accuracy * 100) / 100;
     }
 
     if (!document.getElementById("impossible-values-toggle").checked) {
-        if (starRating < 0 || countHit <= 0 || countMiss < 0 || countHit < 0 || accuracy < 0 || accuracy > 100 || hitTime300 < 0 ||
+        if (starRating < 0 || countHit <= 0 || countMiss < 0 || countHit < 0 || internalAccuracy < 0 || internalAccuracy > 100 || hitTime300 < 0 ||
             (countMiss + count100) > countHit || count100 < 0) {
             document.getElementById("pp-value").innerHTML = "Something is wrong with at least one inputs."
             return;
@@ -34,12 +35,12 @@ function calcPPv3() {
 
     strainValue *= strainLengthBonus;
     strainValue *= Math.pow(0.986, effectiveMissCount);
-    strainValue *= Math.pow(accuracy / 100, 2.0);
+    strainValue *= Math.pow(internalAccuracy / 100, 2.0);
 
     if (hitTime300 <= 0 && !document.getElementById("impossible-values-toggle").checked) {
         var accValue = 0;
     } else {
-        var accValue = Math.pow(60.0 / hitTime300, 1.1) * Math.pow(accuracy / 100, 8.0) * Math.pow(starRating, 0.4) * 27.0;
+        var accValue = Math.pow(60.0 / hitTime300, 1.1) * Math.pow(internalAccuracy / 100, 8.0) * Math.pow(starRating, 0.4) * 27.0;
         var accLengthBonus = Math.min(Math.pow(countHit / 1500, 0.3), 1.15);
         accValue *= accLengthBonus;
     }
@@ -79,21 +80,22 @@ function calcPPv2() {
     var maxCombo = document.getElementById("max-combo").value;
     var countMiss = document.getElementById("miss-count").value;
     var countHit = maxCombo - countMiss; 
-    var accuracy = document.getElementById("accuracy").value;
     var hitTime300 = calculateHitTime(scaleOD(document.getElementById("overall-difficulty").value));
     var count100 = document.getElementById("100-count").value;
 
     if (document.getElementById("accuracy").classList.contains("used")) {
+        var accuracy = document.getElementById("accuracy").value;
         count100 = Math.round((1 - countMiss / countHit - accuracy / 100) * 2 * countHit);
+        var internalAccuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
         document.getElementById("100-count").value = count100;
     } else {
-        count100 = document.getElementById("100-count").value;
-        accuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
+        var accuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
+        var internalAccuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
         document.getElementById("accuracy").value = Math.round(accuracy * 100) / 100;
     }
 
     if (!document.getElementById("impossible-values-toggle").checked) {
-        if (starRating < 0 || maxCombo <= 0 || countMiss < 0 || countHit < 0 || accuracy < 0 || accuracy > 100 || hitTime300 < 0 ||
+        if (starRating < 0 || maxCombo <= 0 || countMiss < 0 || countHit < 0 || internalAccuracy < 0 || internalAccuracy > 100 || hitTime300 < 0 ||
             (countMiss + count100) > countHit || count100 < 0) {
             document.getElementById("pp-value").innerHTML = "Something is wrong with at least one inputs."
             return;
@@ -106,12 +108,12 @@ function calcPPv2() {
     strainValue *= strainLengthBonus;
     strainValue *= Math.pow(0.985, countMiss);
     strainValue *= Math.min(Math.pow(countHit, 0.5) / Math.pow(maxCombo, 0.5), 1.0);
-    strainValue *= (accuracy / 100);
+    strainValue *= (internalAccuracy / 100);
     
     if (hitTime300 <= 0) { 
         var accValue = 0 
     } else { 
-        var accValue = Math.pow(150 / hitTime300, 1.1) * Math.pow(accuracy / 100, 15.0) * 22.0;
+        var accValue = Math.pow(150 / hitTime300, 1.1) * Math.pow(internalAccuracy / 100, 15.0) * 22.0;
         var accLengthBonus = Math.min(1.15, Math.pow(countHit / 1500, 0.3));
         accValue * accLengthBonus;
     }

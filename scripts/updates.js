@@ -1,5 +1,11 @@
 console.log("updates loaded");
 
+var ez = document.getElementById("EZ");
+var hr = document.getElementById("HR");
+var ht = document.getElementById("HT");
+var dt = document.getElementById("DT");
+var impossibleValuesToggle = document.getElementById("impossible-values-toggle");
+
 window.onload = function() {
     set100used();
     updateValues();
@@ -36,11 +42,26 @@ function set100used() {
 
 function uncheck(elem) {
     return function() {
-        elem.checked = false;
+        if (document.getElementById("impossible-values-toggle").checked) {
+            console.log("nothing done to mods");
+        } else {
+            elem.checked = false;
+        }
     }
 }
 
-function scaleOD(overallDifficulty) {
+function uncheckImpossibleValues() {
+    return function() {
+        if (document.getElementById("EZ").checked) {
+            hr.checked = false;
+        }
+        if (document.getElementById("DT").checked) {
+            ht.checked = false;
+        }
+    }
+}
+
+function scaleOD() {
     let scalingOD = (document.getElementById("overall-difficulty").value);
     if (document.getElementById("EZ").checked) {
         scalingOD /= 2;
@@ -51,10 +72,10 @@ function scaleOD(overallDifficulty) {
         console.log(scalingOD);
     }
     let scaledOD = Math.max(Math.min(scalingOD, 10), 0);
-    return scaledOD;
+    return Math.round(1000 * scaledOD) / 1000;
 }
 
-function calculateHitTime(overallDifficulty) {
+function calculateHitTime() {
     let scaledOD = scaleOD(document.getElementById("overall-difficulty").value);
     let hitTime300 = 50 - 3 * scaledOD;
 
@@ -64,35 +85,28 @@ function calculateHitTime(overallDifficulty) {
     if (document.getElementById("DT").checked) {
         hitTime300 /= 1.5;
     }
-    return hitTime300;
+    return Math.round(1000 * hitTime300) / 1000;
 };
 
 function inputHandler() {
     let accuracy = document.getElementById("accuracy");
     let count100 = document.getElementById("100-count");
+    let boxOD = document.getElementById("overall-difficulty");
 
     accuracy.addEventListener("input", setAccuracyUsed);
     count100.addEventListener("input", set100used);
 
-    let boxOD = document.getElementById("overall-difficulty");
-    let boxACCURACY = document.getElementById("accuracy");
-
     if (document.getElementById("impossible-values-toggle").checked) {
-        boxOD.max = 9999999999999999999999999999999999999;
-        boxACCURACY.max = 9999999999999999999999999999999999999;
+        boxOD.max = Number.MAX_SAFE_INTEGER;
+        accuracy.max = Number.MAX_SAFE_INTEGER;
     } else {
-        var ez = document.getElementById("EZ");
-        var dt = document.getElementById("DT");
-        var ht = document.getElementById("HT");
-        var hr = document.getElementById("HR");
-
         ez.addEventListener("click", uncheck(hr));
         hr.addEventListener("click", uncheck(ez));
         ht.addEventListener("click", uncheck(dt));
         dt.addEventListener("click", uncheck(ht));
         
         boxOD.max = 10;
-        boxACCURACY.max = 100;
+        accuracy.max = 100;
     }
 }
 
@@ -106,12 +120,21 @@ function updateValues() {
     document.getElementById("hit-time").textContent = "300 Hit Window: " + hitTime300 + "ms";
     document.getElementById("od-scaled").textContent = "OD w/mods: " + odScaled;
 
-    if (document.getElementById('ppv2-toggle').checked) {
-        document.getElementById('nfdiv').classList.add("hidden");
+    if (document.getElementById("ppv2-toggle").checked) {
+        document.getElementById("nfdiv").classList.add("hidden");
         calcPPv3();
     } else {
-        document.getElementById('nfdiv').classList.remove("hidden");
+        document.getElementById("nfdiv").classList.remove("hidden");
         calcPPv2();
     }
+
+    impossibleValuesToggle.addEventListener("click", uncheckImpossibleValues());
+
+    let count100 = document.getElementById("100-count").value;
+    let countMiss = document.getElementById("miss-count").value;
+    let maxCombo = document.getElementById("max-combo").value;
+    let internalAccuracy = Math.round(10000 * (1 - countMiss / (maxCombo - countMiss) - count100 / 2 / (maxCombo - countMiss))) / 100
+
+    document.getElementById("internal-accuracy").textContent = "Rounded Accuracy: " + internalAccuracy +"%";
     console.log("values updated");
 };
