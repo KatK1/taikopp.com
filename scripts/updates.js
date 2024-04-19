@@ -80,7 +80,7 @@ function calculateHitTime() {
     let hitTime300 = 50 - 3 * scaledOD;
 
     if (document.getElementById("HT").checked) {
-        hitTime300 *= 0.75;
+        hitTime300 /= 0.75;
     }
     if (document.getElementById("DT").checked) {
         hitTime300 /= 1.5;
