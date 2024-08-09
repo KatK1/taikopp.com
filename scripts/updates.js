@@ -25,8 +25,10 @@ window.onload = function() {
 };
 
 function setAccuracyUsed() {
+    document.getElementById("accuracy").classList.remove("used");
     document.getElementById("accuracy").classList.remove("not-used");
     document.getElementById("100-count").classList.remove("used");
+    document.getElementById("100-count").classList.remove("not-used");
     document.getElementById("accuracy").classList.add("used");
     document.getElementById("100-count").classList.add("not-used");
     console.log("accuracy set as usedInput");
@@ -34,6 +36,8 @@ function setAccuracyUsed() {
 
 function set100used() {
     document.getElementById("accuracy").classList.remove("used");
+    document.getElementById("accuracy").classList.remove("not-used");
+    document.getElementById("100-count").classList.remove("used");
     document.getElementById("100-count").classList.remove("not-used");
     document.getElementById("accuracy").classList.add("not-used");
     document.getElementById("100-count").classList.add("used");

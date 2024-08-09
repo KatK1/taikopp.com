@@ -2,17 +2,23 @@ console.log("ppcalc loaded");
 
 function calcPPv3() {
     console.log("calcPPv3() ran");
-    var starRating = document.getElementById("star-rating").value;
-    var maxCombo = document.getElementById("max-combo").value;
-    var countMiss = document.getElementById("miss-count").value;
-    var countHit = maxCombo - countMiss; 
+    var starRating = parseFloat(document.getElementById("star-rating").value);
+    var maxCombo = parseInt(document.getElementById("max-combo").value);
+    var countMiss = parseInt(document.getElementById("miss-count").value);
+    var countHit = parseInt(maxCombo - countMiss); 
     var hitTime300 = calculateHitTime(scaleOD(document.getElementById("overall-difficulty").value));
-    var count100 = document.getElementById("100-count").value;
+    var count100 = parseInt(document.getElementById("100-count").value);
 
     if (document.getElementById("accuracy").classList.contains("used")) {
         var accuracy = document.getElementById("accuracy").value;
         count100 = Math.round((1 - countMiss / countHit - accuracy / 100) * 2 * countHit);
+        if (count100 < 0) {
+            count100 = 0;
+            accuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
+        }
+        
         var internalAccuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
+        document.getElementById("accuracy").value = Math.round(accuracy * 100) / 100;
         document.getElementById("100-count").value = count100;
     } else {
         var accuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
@@ -21,8 +27,9 @@ function calcPPv3() {
     }
 
     if (!document.getElementById("impossible-values-toggle").checked) {
-        if (starRating < 0 || countHit <= 0 || countMiss < 0 || countHit < 0 || internalAccuracy < 0 || internalAccuracy > 100 || hitTime300 < 0 ||
+        if (starRating < 0 || countHit < 0 || countMiss < 0 || internalAccuracy < 0 || internalAccuracy > 100 || hitTime300 < 0 ||
             (countMiss + count100) > countHit || count100 < 0) {
+            console.log(starRating, internalAccuracy, hitTime300, countHit, count100, countMiss, ((countMiss + count100)));
             document.getElementById("pp-value").innerHTML = "Something is wrong with at least one inputs."
             return;
         }
@@ -70,22 +77,28 @@ function calcPPv3() {
     }
 
     var totalValue = Math.pow(Math.pow(strainValue, 1.1) + Math.pow(accValue, 1.1), 1.0 / 1.1) * globalMultiplier;
+    console.log(countHit, count100, countMiss);
 
     document.getElementById("pp-value").innerHTML = Math.round(totalValue * 1000) / 1000 + "pp";
 };
 
 function calcPPv2() {
     console.log("calcPPv2() ran");
-    var starRating = document.getElementById("star-rating").value;
-    var maxCombo = document.getElementById("max-combo").value;
-    var countMiss = document.getElementById("miss-count").value;
-    var countHit = maxCombo - countMiss; 
+    var starRating = parseFloat(document.getElementById("star-rating").value);
+    var maxCombo = parseInt(document.getElementById("max-combo").value);
+    var countMiss = parseInt(document.getElementById("miss-count").value);
+    var countHit = parseInt(maxCombo - countMiss); 
     var hitTime300 = calculateHitTime(scaleOD(document.getElementById("overall-difficulty").value));
-    var count100 = document.getElementById("100-count").value;
+    var count100 = parseInt(document.getElementById("100-count").value);
 
     if (document.getElementById("accuracy").classList.contains("used")) {
         var accuracy = document.getElementById("accuracy").value;
         count100 = Math.round((1 - countMiss / countHit - accuracy / 100) * 2 * countHit);
+        if (count100 < 0) {
+            count100 = 0;
+            accuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
+        }
+        
         var internalAccuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
         document.getElementById("100-count").value = count100;
     } else {
