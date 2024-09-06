@@ -75,7 +75,14 @@ function scaleOD() {
         scalingOD *= 1.4;
         console.log(scalingOD);
     }
-    let scaledOD = Math.max(Math.min(scalingOD, 10), 0);
+
+    let scaledOD;
+    if (document.getElementById("impossible-values-toggle").checked) {
+        scaledOD = Math.max(Math.min(scalingOD, 10), 0);
+    } else {
+        scaledOD = scalingOD;
+    }
+    
     return Math.round(1000 * scaledOD) / 1000;
 }
 
