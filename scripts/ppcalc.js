@@ -22,8 +22,8 @@ function calcPPv3() {
         document.getElementById("100-count").value = count100;
     } else {
         var accuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
-        var internalAccuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
-        document.getElementById("accuracy").value = Math.round(accuracy * 100) / 100;
+        var internalAccuracy = accuracy;
+        document.getElementById("accuracy").value = accuracy.toFixed(2);
     }
 
     if (!document.getElementById("impossible-values-toggle").checked) {
@@ -79,7 +79,7 @@ function calcPPv3() {
     var totalValue = Math.pow(Math.pow(strainValue, 1.1) + Math.pow(accValue, 1.1), 1.0 / 1.1) * globalMultiplier;
     console.log(countHit, count100, countMiss);
 
-    document.getElementById("pp-value").innerHTML = Math.round(totalValue * 1000) / 1000 + "pp";
+    document.getElementById("pp-value").innerHTML = totalValue.toFixed(3) + "pp";
 };
 
 function calcPPv2() {
@@ -103,8 +103,8 @@ function calcPPv2() {
         document.getElementById("100-count").value = count100;
     } else {
         var accuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
-        var internalAccuracy = 100 * (1 - countMiss / countHit - count100 / 2 / countHit);
-        document.getElementById("accuracy").value = Math.round(accuracy * 100) / 100;
+        var internalAccuracy = accuracy;
+        document.getElementById("accuracy").value = accuracy.toFixed(2);
     }
 
     if (!document.getElementById("impossible-values-toggle").checked) {
@@ -148,5 +148,5 @@ function calcPPv2() {
 
     var totalValue = Math.pow(Math.pow(strainValue, 1.1) + Math.pow(accValue, 1.1), 1.0 / 1.1) * globalMultiplier;
 
-    document.getElementById("pp-value").innerHTML = Math.round(totalValue * 1000) / 1000 + " pp";
+    document.getElementById("pp-value").innerHTML = totalValue.toFixed(3) + " pp";
 };
